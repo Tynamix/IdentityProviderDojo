@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
+﻿using System.IdentityModel.Tokens.Jwt;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,17 +23,16 @@ namespace WeatherWebApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.Configure<CookiePolicyOptions>(options =>
-            //{
-            //    // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-            //    options.CheckConsentNeeded = context => true;
-            //    options.MinimumSameSitePolicy = SameSiteMode.None;
-            //});
-
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+                options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            //JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
             services.AddAuthentication(options =>
                 {
@@ -55,19 +50,9 @@ namespace WeatherWebApp
                     options.SaveTokens = true;
                     options.Events = new OpenIdConnectEvents
                     {
-                        OnAuthenticationFailed = context =>
-                        {
-                            return Task.CompletedTask;
-                        },
-                        OnAuthorizationCodeReceived = context =>
-                        {
-                            return Task.CompletedTask;
-                        },
-                        OnTicketReceived = context =>
-                        {
-                            var x = context.Response;
-                            return Task.CompletedTask;
-                        }
+                        OnAuthenticationFailed = context => Task.CompletedTask,
+                        OnAuthorizationCodeReceived = context => Task.CompletedTask,
+                        OnTicketReceived = context => Task.CompletedTask
                     };
                 });
         }
@@ -82,7 +67,6 @@ namespace WeatherWebApp
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
             }
 
             app.UseStaticFiles();

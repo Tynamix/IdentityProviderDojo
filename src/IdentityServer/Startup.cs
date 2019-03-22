@@ -2,8 +2,8 @@
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 
-using IdentityServer4;
-using IdentityServerDeluxe.Models;
+using IdentityServer.Data;
+using IdentityServer.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -11,18 +11,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
-using System.Reflection;
-using IdentityExpress.Identity;
-using IdentityExpress.Manager.Api;
-using IdentityServer4.Configuration;
-using IdentityServer4.Services;
-using IdentityServerDeluxe.Data;
-using Microsoft.Extensions.Logging.Abstractions;
-using RSK.Audit.EF;
-using RSK.IdentityServer4.AuditEventSink;
 
-namespace IdentityServerDeluxe
+namespace IdentityServer
 {
     public class Startup
     {
@@ -38,13 +28,13 @@ namespace IdentityServerDeluxe
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlite(Configuration.GetConnectionString("Users")));
+                options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
-            services.AddMvc();
+            services.AddMvc().SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_2_1);
 
             services.Configure<IISOptions>(iis =>
             {
@@ -52,40 +42,17 @@ namespace IdentityServerDeluxe
                 iis.AutomaticAuthentication = false;
             });
 
-            var connectionString = Configuration.GetConnectionString("Configuration");
-            var migrationsAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
-            services.AddAuthentication().AddCookie();
-
             var builder = services.AddIdentityServer(options =>
             {
-                options.UserInteraction = new UserInteractionOptions() { LogoutUrl = "/account/logout", LoginUrl = "/account/login", LoginReturnUrlParameter = "returnUrl" };
-                options.Authentication.CookieAuthenticationScheme = "Cookies";
                 options.Events.RaiseErrorEvents = true;
                 options.Events.RaiseInformationEvents = true;
                 options.Events.RaiseFailureEvents = true;
                 options.Events.RaiseSuccessEvents = true;
             })
-                .AddAspNetIdentity<ApplicationUser>()
-                // this adds the config data from DB (clients, resources, CORS)
-                .AddConfigurationStore(options =>
-                {
-                    options.ConfigureDbContext = db =>
-                        db.UseSqlite(connectionString,
-                            sql => sql.MigrationsAssembly(migrationsAssembly));
-                })
-                // this adds the operational data from DB (codes, tokens, consents)
-                .AddOperationalStore(options =>
-                {
-                    options.ConfigureDbContext = db =>
-                        db.UseSqlite(connectionString,
-                            sql => sql.MigrationsAssembly(migrationsAssembly));
-
-                    // this enables automatic token cleanup. this is optional.
-                    options.EnableTokenCleanup = true;
-                    // options.TokenCleanupInterval = 15; // interval in seconds. 15 seconds useful for debugging
-                });
-
-            ConfigureIdentityServerAuditing(services, connectionString);
+                .AddInMemoryIdentityResources(Config.GetIdentityResources())
+                .AddInMemoryApiResources(Config.GetApis())
+                .AddInMemoryClients(Config.GetClients())
+                .AddAspNetIdentity<ApplicationUser>();
 
             if (Environment.IsDevelopment())
             {
@@ -105,9 +72,6 @@ namespace IdentityServerDeluxe
                     options.ClientId = "copy client ID from Google here";
                     options.ClientSecret = "copy client secret from Google here";
                 });
-
-            services.UseAdminUI();
-            services.AddScoped<IdentityExpressDbContext, SqliteIdentityDbContext>();
         }
 
         public void Configure(IApplicationBuilder app)
@@ -120,33 +84,11 @@ namespace IdentityServerDeluxe
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-                app.UseHsts();
             }
 
-            
-            app.UseHttpsRedirection();
-
-            app.UseDefaultFiles();
             app.UseStaticFiles();
             app.UseIdentityServer();
             app.UseMvcWithDefaultRoute();
-            app.UseAdminUI();
-        }
-        
-        public void ConfigureIdentityServerAuditing(IServiceCollection services, string auditConnectionString)
-        {
-            var dbContextOptionsBuilder = new DbContextOptionsBuilder<AuditDatabaseContext>();
-            RSK.Audit.AuditProviderFactory auditFactory = new AuditProviderFactory(dbContextOptionsBuilder.UseSqlite(auditConnectionString).Options);
-            var auditRecorder = auditFactory.CreateAuditSource("IdentityServer");
-            services.AddSingleton<IEventSink>(provider => new AuditSink(auditRecorder));
-
-            services.AddSingleton<IEventSink>(provider => new EventSinkAggregator(new NullLogger<EventSinkAggregator>())
-            {
-                EventSinks = new List<IEventSink>
-                {
-                    new AuditSink(auditRecorder)
-                }
-            });
         }
     }
 }

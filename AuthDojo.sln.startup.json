@@ -53,10 +53,13 @@
     */
 
   "MultiProjectConfigurations": {
-    "IdentityServer + Web Application": {
+    "IS + Web App+ API": {
       "Projects": {
         "IdentityServer": {
-          "ProfileName": "IdentityServer"
+          "ProfileName": "SelfHost"
+        },
+        "WeatherApi": {
+          "ProfileName": "WeatherApi"
         },
         "WeatherWebApp": {
           "ProfileName": "WeatherWebApp"

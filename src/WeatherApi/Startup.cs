@@ -31,7 +31,6 @@ namespace WeatherApi
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
-                    options.TokenValidationParameters.NameClaimType = ClaimTypes.NameIdentifier;
                     options.TokenValidationParameters.ValidAudiences =  new[] {"weatherapi"};
                     options.Authority = "https://localhost:5000";
                 });

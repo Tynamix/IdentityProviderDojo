@@ -22,7 +22,8 @@ namespace IdentityServer
         {
             return new ApiResource[]
             {
-                new ApiResource("api1", "My API #1")
+                new ApiResource("api1", "My API #1"),
+                new ApiResource("weatherapi", "Weather API")
             };
         }
 
@@ -54,6 +55,22 @@ namespace IdentityServer
                     RedirectUris = { "https://localhost:5002/signin-oidc" },
                     FrontChannelLogoutUri = "https://localhost:5002/signout-oidc",
                     PostLogoutRedirectUris = { "https://localhost:5002/signout-callback-oidc" },
+
+                    AllowOfflineAccess = true,
+                    AllowedScopes = { "openid", "profile", "weatherapi" }
+                },
+
+                new Client
+                {
+                    ClientId = "postman",
+                    ClientName = "Postman",
+
+                    AllowedGrantTypes = GrantTypes.Code,
+                    ClientSecrets = { new Secret("secret".Sha256()) },
+
+                    RedirectUris = { "https://app.getpostman.com/oauth2/callback" },
+                    FrontChannelLogoutUri = "https://app.getpostman.com/oauth2/callback",
+                    PostLogoutRedirectUris = { "https://app.getpostman.com/oauth2/logout" },
 
                     AllowOfflineAccess = true,
                     AllowedScopes = { "openid", "profile", "weatherapi" }

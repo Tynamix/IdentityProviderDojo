@@ -15,6 +15,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using IdentityExpress.Identity;
 using IdentityExpress.Manager.Api;
+using IdentityServer4.Configuration;
 using IdentityServer4.Services;
 using IdentityServerDeluxe.Data;
 using Microsoft.Extensions.Logging.Abstractions;
@@ -53,9 +54,12 @@ namespace IdentityServerDeluxe
 
             var connectionString = Configuration.GetConnectionString("Configuration");
             var migrationsAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
+            services.AddAuthentication().AddCookie();
 
             var builder = services.AddIdentityServer(options =>
             {
+                options.UserInteraction = new UserInteractionOptions() { LogoutUrl = "/account/logout", LoginUrl = "/account/login", LoginReturnUrlParameter = "returnUrl" };
+                options.Authentication.CookieAuthenticationScheme = "dummy";
                 options.Events.RaiseErrorEvents = true;
                 options.Events.RaiseInformationEvents = true;
                 options.Events.RaiseFailureEvents = true;

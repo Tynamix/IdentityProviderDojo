@@ -27,3 +27,35 @@
 2019-03-22 10:58:24.181 +01:00 [DBG] Found ["openid","profile","admin_ui_profile","admin_ui_public","admin_api","admin_ui_webhooks"] as all scopes in database
 2019-03-22 10:59:05.156 +01:00 [DBG] Found ["openid","profile","admin_ui_profile","admin_ui_public","admin_api","admin_ui_webhooks"] as all scopes in database
 2019-03-22 11:04:25.581 +01:00 [DBG] Found ["openid","profile","admin_ui_profile","admin_ui_public","admin_api","admin_ui_webhooks","weather_api"] as all scopes in database
+2019-03-22 12:06:29.226 +01:00 [INF] Starting IdentityServer4 version 2.3.2.0
+2019-03-22 12:06:29.464 +01:00 [INF] Using the default authentication scheme Community for IdentityServer
+2019-03-22 12:06:29.464 +01:00 [ERR] Authentication scheme Community is configured for IdentityServer, but it is not a scheme that supports signin (like cookies). Either configure the default authentication scheme with cookies or set the CookieAuthenticationScheme on the IdentityServerOptions.
+2019-03-22 12:06:29.464 +01:00 [DBG] Using Community as default ASP.NET Core scheme for authentication
+2019-03-22 12:06:29.464 +01:00 [DBG] Using Identity.Application as default ASP.NET Core scheme for sign-in
+2019-03-22 12:06:29.464 +01:00 [DBG] Using Identity.Application as default ASP.NET Core scheme for sign-out
+2019-03-22 12:06:29.464 +01:00 [DBG] Using Community as default ASP.NET Core scheme for challenge
+2019-03-22 12:06:29.464 +01:00 [DBG] Using Community as default ASP.NET Core scheme for forbid
+2019-03-22 12:11:52.449 +01:00 [INF] Starting IdentityServer4 version 2.3.2.0
+2019-03-22 12:11:52.582 +01:00 [INF] Using the default authentication scheme Community for IdentityServer
+2019-03-22 12:11:52.582 +01:00 [ERR] Authentication scheme Community is configured for IdentityServer, but it is not a scheme that supports signin (like cookies). Either configure the default authentication scheme with cookies or set the CookieAuthenticationScheme on the IdentityServerOptions.
+2019-03-22 12:11:52.582 +01:00 [DBG] Using Community as default ASP.NET Core scheme for authentication
+2019-03-22 12:11:52.582 +01:00 [DBG] Using Identity.Application as default ASP.NET Core scheme for sign-in
+2019-03-22 12:11:52.582 +01:00 [DBG] Using Identity.Application as default ASP.NET Core scheme for sign-out
+2019-03-22 12:11:52.582 +01:00 [DBG] Using Community as default ASP.NET Core scheme for challenge
+2019-03-22 12:11:52.582 +01:00 [DBG] Using Community as default ASP.NET Core scheme for forbid
+2019-03-22 12:12:41.515 +01:00 [INF] Starting IdentityServer4 version 2.3.2.0
+2019-03-22 12:12:41.634 +01:00 [INF] Using the default authentication scheme Community for IdentityServer
+2019-03-22 12:12:41.635 +01:00 [ERR] Authentication scheme Community is configured for IdentityServer, but it is not a scheme that supports signin (like cookies). Either configure the default authentication scheme with cookies or set the CookieAuthenticationScheme on the IdentityServerOptions.
+2019-03-22 12:12:41.635 +01:00 [DBG] Using Community as default ASP.NET Core scheme for authentication
+2019-03-22 12:12:41.635 +01:00 [DBG] Using Identity.Application as default ASP.NET Core scheme for sign-in
+2019-03-22 12:12:41.636 +01:00 [DBG] Using Identity.Application as default ASP.NET Core scheme for sign-out
+2019-03-22 12:12:41.636 +01:00 [DBG] Using Community as default ASP.NET Core scheme for challenge
+2019-03-22 12:12:41.636 +01:00 [DBG] Using Community as default ASP.NET Core scheme for forbid
+2019-03-22 12:14:27.902 +01:00 [INF] Starting IdentityServer4 version 2.3.2.0
+2019-03-22 12:14:28.024 +01:00 [INF] Using the default authentication scheme Community for IdentityServer
+2019-03-22 12:14:28.024 +01:00 [ERR] Authentication scheme Community is configured for IdentityServer, but it is not a scheme that supports signin (like cookies). Either configure the default authentication scheme with cookies or set the CookieAuthenticationScheme on the IdentityServerOptions.
+2019-03-22 12:14:28.025 +01:00 [DBG] Using Community as default ASP.NET Core scheme for authentication
+2019-03-22 12:14:28.025 +01:00 [DBG] Using Identity.Application as default ASP.NET Core scheme for sign-in
+2019-03-22 12:14:28.025 +01:00 [DBG] Using Identity.Application as default ASP.NET Core scheme for sign-out
+2019-03-22 12:14:28.026 +01:00 [DBG] Using Community as default ASP.NET Core scheme for challenge
+2019-03-22 12:14:28.026 +01:00 [DBG] Using Community as default ASP.NET Core scheme for forbid

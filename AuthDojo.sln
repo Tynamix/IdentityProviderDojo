@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{9BE01876-DCCB-4271-AC5F-A687E6EB4508}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityServer", "src\IdentityServer\IdentityServer.csproj", "{9651B84A-9D77-4959-82E5-74844C1C9A44}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityServer", "src\IdentityServer\IdentityServer.csproj", "{9651B84A-9D77-4959-82E5-74844C1C9A44}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherWebApp", "src\WeatherWebApp\WeatherWebApp.csproj", "{D9DA46E9-B929-4165-B96A-E52D4EAD19EC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +15,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{9651B84A-9D77-4959-82E5-74844C1C9A44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -32,8 +29,23 @@ Global
 		{9651B84A-9D77-4959-82E5-74844C1C9A44}.Release|x64.Build.0 = Release|Any CPU
 		{9651B84A-9D77-4959-82E5-74844C1C9A44}.Release|x86.ActiveCfg = Release|Any CPU
 		{9651B84A-9D77-4959-82E5-74844C1C9A44}.Release|x86.Build.0 = Release|Any CPU
+		{D9DA46E9-B929-4165-B96A-E52D4EAD19EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9DA46E9-B929-4165-B96A-E52D4EAD19EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9DA46E9-B929-4165-B96A-E52D4EAD19EC}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{D9DA46E9-B929-4165-B96A-E52D4EAD19EC}.Debug|x64.Build.0 = Debug|Any CPU
+		{D9DA46E9-B929-4165-B96A-E52D4EAD19EC}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D9DA46E9-B929-4165-B96A-E52D4EAD19EC}.Debug|x86.Build.0 = Debug|Any CPU
+		{D9DA46E9-B929-4165-B96A-E52D4EAD19EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9DA46E9-B929-4165-B96A-E52D4EAD19EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9DA46E9-B929-4165-B96A-E52D4EAD19EC}.Release|x64.ActiveCfg = Release|Any CPU
+		{D9DA46E9-B929-4165-B96A-E52D4EAD19EC}.Release|x64.Build.0 = Release|Any CPU
+		{D9DA46E9-B929-4165-B96A-E52D4EAD19EC}.Release|x86.ActiveCfg = Release|Any CPU
+		{D9DA46E9-B929-4165-B96A-E52D4EAD19EC}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{9651B84A-9D77-4959-82E5-74844C1C9A44} = {9BE01876-DCCB-4271-AC5F-A687E6EB4508}
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AD9F825C-47AD-49BC-B589-33B04AF71FF8}
 	EndGlobalSection
 EndGlobal

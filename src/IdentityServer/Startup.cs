@@ -85,6 +85,7 @@ namespace IdentityServer
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+            app.UseHttpsRedirection();
 
             app.UseStaticFiles();
             app.UseIdentityServer();

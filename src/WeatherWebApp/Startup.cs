@@ -47,11 +47,10 @@ namespace WeatherWebApp
                 .AddCookie()
                 .AddOpenIdConnect(options =>
                 {
-                    options.Authority = "http://localhost:5000";
+                    options.Authority = "https://localhost:5000";
                     options.ClientId = "demowebapp";
                     options.ClientSecret = "secret";
                     options.ResponseType = "code id_token";
-                    options.RequireHttpsMetadata = false;
                     options.SaveTokens = true;
                     options.Events = new OpenIdConnectEvents
                     {
@@ -84,6 +83,8 @@ namespace WeatherWebApp
                 app.UseExceptionHandler("/Home/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
             }
+
+            app.UseHttpsRedirection();
 
             app.UseStaticFiles();
             app.UseCookiePolicy();

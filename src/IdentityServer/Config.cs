@@ -51,12 +51,12 @@ namespace IdentityServer
                     AllowedGrantTypes = GrantTypes.Hybrid,
                     ClientSecrets = { new Secret("secret".Sha256()) },
 
-                    RedirectUris = { "http://localhost:5002/signin-oidc" },
-                    FrontChannelLogoutUri = "http://localhost:5002/signout-oidc",
-                    PostLogoutRedirectUris = { "http://localhost:5002/signout-callback-oidc" },
+                    RedirectUris = { "https://localhost:5002/signin-oidc" },
+                    FrontChannelLogoutUri = "https://localhost:5002/signout-oidc",
+                    PostLogoutRedirectUris = { "https://localhost:5002/signout-callback-oidc" },
 
                     AllowOfflineAccess = true,
-                    AllowedScopes = { "openid", "profile", "api1" }
+                    AllowedScopes = { "openid", "profile", "weatherapi" }
                 },
 
                 // SPA client using implicit flow

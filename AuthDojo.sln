@@ -5,7 +5,9 @@ VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityServer", "src\IdentityServer\IdentityServer.csproj", "{9651B84A-9D77-4959-82E5-74844C1C9A44}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherWebApp", "src\WeatherWebApp\WeatherWebApp.csproj", "{D9DA46E9-B929-4165-B96A-E52D4EAD19EC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeatherWebApp", "src\WeatherWebApp\WeatherWebApp.csproj", "{D9DA46E9-B929-4165-B96A-E52D4EAD19EC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherApi", "src\WeatherApi\WeatherApi.csproj", "{9370FB2A-4977-4260-871A-CAE500940AC3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +43,18 @@ Global
 		{D9DA46E9-B929-4165-B96A-E52D4EAD19EC}.Release|x64.Build.0 = Release|Any CPU
 		{D9DA46E9-B929-4165-B96A-E52D4EAD19EC}.Release|x86.ActiveCfg = Release|Any CPU
 		{D9DA46E9-B929-4165-B96A-E52D4EAD19EC}.Release|x86.Build.0 = Release|Any CPU
+		{9370FB2A-4977-4260-871A-CAE500940AC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9370FB2A-4977-4260-871A-CAE500940AC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9370FB2A-4977-4260-871A-CAE500940AC3}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{9370FB2A-4977-4260-871A-CAE500940AC3}.Debug|x64.Build.0 = Debug|Any CPU
+		{9370FB2A-4977-4260-871A-CAE500940AC3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9370FB2A-4977-4260-871A-CAE500940AC3}.Debug|x86.Build.0 = Debug|Any CPU
+		{9370FB2A-4977-4260-871A-CAE500940AC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9370FB2A-4977-4260-871A-CAE500940AC3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9370FB2A-4977-4260-871A-CAE500940AC3}.Release|x64.ActiveCfg = Release|Any CPU
+		{9370FB2A-4977-4260-871A-CAE500940AC3}.Release|x64.Build.0 = Release|Any CPU
+		{9370FB2A-4977-4260-871A-CAE500940AC3}.Release|x86.ActiveCfg = Release|Any CPU
+		{9370FB2A-4977-4260-871A-CAE500940AC3}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

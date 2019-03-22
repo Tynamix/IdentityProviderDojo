@@ -59,7 +59,7 @@ namespace IdentityServerDeluxe
             var builder = services.AddIdentityServer(options =>
             {
                 options.UserInteraction = new UserInteractionOptions() { LogoutUrl = "/account/logout", LoginUrl = "/account/login", LoginReturnUrlParameter = "returnUrl" };
-                options.Authentication.CookieAuthenticationScheme = "dummy";
+                options.Authentication.CookieAuthenticationScheme = "Cookies";
                 options.Events.RaiseErrorEvents = true;
                 options.Events.RaiseInformationEvents = true;
                 options.Events.RaiseFailureEvents = true;

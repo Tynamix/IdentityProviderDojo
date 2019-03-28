@@ -25,10 +25,10 @@ namespace WeatherApi.Authorization
         /// <param name="requirement">The requirement to evaluate.</param>
         protected override async Task HandleRequirementAsync(AuthorizationHandlerContext context, WeatherRequirememt requirement)
         {
-            var temperature =  await _weatherLogic.GetTemperatureOfCurrentUsersLocation(context.User);
+            var weather =  await _weatherLogic.GetTemperatureOfCurrentUsersLocation(context.User);
 
-            if (temperature >= requirement.MinCentigrade
-                && temperature <= requirement.MaxCentigrade)
+            if (weather.Temperature>= requirement.MinCentigrade
+                && weather.Temperature <= requirement.MaxCentigrade)
             {
                 context.Succeed(requirement);
             }

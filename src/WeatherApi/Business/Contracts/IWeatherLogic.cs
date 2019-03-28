@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Model;
 
 namespace WeatherApi.Business.Contracts
 {
@@ -14,6 +15,6 @@ namespace WeatherApi.Business.Contracts
         /// </summary>
         /// <param name="currentUser">The currently logged in user</param>
         /// <returns>The temperature of users current location</returns>
-        Task<double> GetTemperatureOfCurrentUsersLocation(ClaimsPrincipal currentUser);
+        Task<Weather> GetTemperatureOfCurrentUsersLocation(ClaimsPrincipal currentUser);
     }
 }

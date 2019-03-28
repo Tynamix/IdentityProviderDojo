@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using Model;
 using Newtonsoft.Json;
 using WeatherApi.Business.Contracts;
 using WeatherApi.Configuration;
@@ -28,7 +29,7 @@ namespace WeatherApi.Business
         /// </summary>
         /// <param name="currentUser">The currently logged in user</param>
         /// <returns>The temperature of users current location</returns>
-        public async Task<double> GetTemperatureOfCurrentUsersLocation(ClaimsPrincipal currentUser)
+        public async Task<Weather> GetTemperatureOfCurrentUsersLocation(ClaimsPrincipal currentUser)
         {
             var httpClient = _httpClientFactory.CreateClient();
 
@@ -37,9 +38,12 @@ namespace WeatherApi.Business
             var stringResult = await httpClient.GetStringAsync(requestUri);
             dynamic weatherJson = JsonConvert.DeserializeObject<dynamic>(stringResult);
 
-            double temperature = weatherJson.main.temp;
+            var weather = new Weather();
+            weather.Temperature = weatherJson.main.temp;
+            weather.WeatherIcon = weatherJson.weather[0].icon;
 
-            return temperature;
+
+            return weather;
         }
     }
 }

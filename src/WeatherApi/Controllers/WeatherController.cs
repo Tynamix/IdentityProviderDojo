@@ -2,9 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using WeatherApi.Business.Contracts;
+using WeatherApi.Configuration;
 
 namespace WeatherApi.Controllers
 {
@@ -12,18 +16,25 @@ namespace WeatherApi.Controllers
     [ApiController]
     public class WeatherController : ControllerBase
     {
+        private readonly IWeatherLogic _weatherLogic;
+
+        public WeatherController(IWeatherLogic weatherLogic)
+        {
+            _weatherLogic = weatherLogic;
+        }
+
         [Authorize(Policy = "AtLeast10")]
         [HttpGet("warmWeather")]
-        public ActionResult<IEnumerable<string>> Warm()
+        public async Task<ActionResult<double>> Warm()
         {
-            return new string[] { "value1", "value2" };
+            return await _weatherLogic.GetTemperatureOfCurrentUsersLocation(this.User);
         }
 
         [Authorize(Policy = "AtMost10")]
         [HttpGet("coldWeather")]
-        public ActionResult<IEnumerable<string>> Cold()
+        public async Task<ActionResult<double>> Cold()
         {
-            return new string[] { "value1", "value2" };
+            return await _weatherLogic.GetTemperatureOfCurrentUsersLocation(this.User);
         }
 
     }

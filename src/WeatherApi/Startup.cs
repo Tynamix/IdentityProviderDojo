@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using WeatherApi.Authorization;
+using WeatherApi.Business;
+using WeatherApi.Business.Contracts;
 using WeatherApi.Configuration;
 
 namespace WeatherApi
@@ -44,6 +46,7 @@ namespace WeatherApi
             services.Configure<OpenWeatherApiOptions>(c => Configuration.Bind("OpenWeatherApiOptions", c));
 
             services.AddHttpClient();
+            services.AddSingleton<IWeatherLogic, WeatherLogic>();
             services.AddSingleton<IAuthorizationHandler, WeatherAuthorizationHandler>();
         }
 

@@ -33,7 +33,10 @@ namespace WeatherApi.Business
         {
             var httpClient = _httpClientFactory.CreateClient();
 
-            Uri requestUri = new Uri($"http://api.openweathermap.org/data/2.5/weather?q=Dresden,de&units=metric&APPID={_openWeatherOptions.ApiKey}");
+            var location = currentUser.FindFirst("location").Value;
+            var countryCode = currentUser.FindFirst("country_code").Value;
+
+            Uri requestUri = new Uri($"http://api.openweathermap.org/data/2.5/weather?q={location},{countryCode}&units=metric&APPID={_openWeatherOptions.ApiKey}");
 
             var stringResult = await httpClient.GetStringAsync(requestUri);
             dynamic weatherJson = JsonConvert.DeserializeObject<dynamic>(stringResult);

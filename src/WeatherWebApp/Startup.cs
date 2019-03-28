@@ -1,7 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.OAuth.Claims;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -52,12 +55,7 @@ namespace WeatherWebApp
                     options.Scope.Add("role");
                     options.SaveTokens = true;
                     options.GetClaimsFromUserInfoEndpoint = true;
-                    options.Events = new OpenIdConnectEvents
-                    {
-                        OnAuthenticationFailed = context => Task.CompletedTask,
-                        OnAuthorizationCodeReceived = context => Task.CompletedTask,
-                        OnTicketReceived = context => Task.CompletedTask
-                    };
+                    options.ClaimActions.MapJsonKey(ClaimTypes.Role, "role", ClaimValueTypes.String);
                 });
         }
 

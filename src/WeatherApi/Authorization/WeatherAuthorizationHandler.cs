@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -27,8 +28,15 @@ namespace WeatherApi.Authorization
         {
             var weather =  await _weatherLogic.GetTemperatureOfCurrentUsersLocation(context.User);
 
-            if (weather.Temperature>= requirement.MinCentigrade
-                && weather.Temperature <= requirement.MaxCentigrade)
+            var userIsRainLover = context.User.Claims.Any(x => x.Type == "role" && x.Value == "Winter Lover");
+            var userIsSummerLover = context.User.Claims.Any(x => x.Type == "role" && x.Value == "Summer Lover");
+
+            if (userIsRainLover && weather.Temperature <= requirement.MinCentigradeForGoodWeather)
+            {
+                context.Succeed(requirement);
+            }
+
+            if (userIsSummerLover && weather.Temperature >= requirement.MinCentigradeForGoodWeather)
             {
                 context.Succeed(requirement);
             }

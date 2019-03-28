@@ -35,11 +35,9 @@ namespace WeatherApi
 
             services.AddAuthorization(options =>
             {
-                options.AddPolicy("AtLeast10", policy =>
-                    policy.Requirements.Add(new WeatherRequirememt(minCentigrade: 10)));
+                options.AddPolicy("GoodWeatherAtLeast20", policy =>
+                    policy.Requirements.Add(new WeatherRequirememt(20)));
 
-                options.AddPolicy("AtMost10", policy =>
-                    policy.Requirements.Add(new WeatherRequirememt(maxCentigrade: 10)));
             });
 
             services.AddOptions();

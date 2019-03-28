@@ -9,22 +9,15 @@ namespace WeatherApi.Authorization
         /// <summary>
         /// Minimum centigrade for this requirement
         /// </summary>
-        public int MinCentigrade { get; }
-
-        /// <summary>
-        /// Maximum centigrade for this requirement
-        /// </summary>
-        public int MaxCentigrade { get; }
+        public int MinCentigradeForGoodWeather { get; }
 
         /// <summary>
         /// Initializes a new instance of <see cref="WeatherRequirememt"/>
         /// </summary>
-        /// <param name="minCentigrade">Minimum centigrade for this requirement</param>
-        /// <param name="maxCentigrade">Maximum centigrade for this requirement</param>
-        public WeatherRequirememt(int minCentigrade = -60, int maxCentigrade = 60)
+        /// <param name="minCentigradeForGoodWeather">Minimum centigrade for this requirement</param>
+        public WeatherRequirememt(int minCentigradeForGoodWeather)
         {
-            MinCentigrade = minCentigrade;
-            MaxCentigrade = maxCentigrade;
+            MinCentigradeForGoodWeather = minCentigradeForGoodWeather;
         }
     }
 }

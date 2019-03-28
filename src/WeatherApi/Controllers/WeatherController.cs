@@ -24,19 +24,11 @@ namespace WeatherApi.Controllers
             _weatherLogic = weatherLogic;
         }
 
-        [Authorize(Policy = "AtLeast10")]
-        [HttpGet("warmWeather")]
-        public async Task<ActionResult<Weather>> Warm()
+        [Authorize(Policy = "GoodWeatherAtLeast20")]
+        [HttpGet]
+        public async Task<ActionResult<Weather>> Get()
         {
             return await _weatherLogic.GetTemperatureOfCurrentUsersLocation(this.User);
         }
-
-        [Authorize(Policy = "AtMost10")]
-        [HttpGet("coldWeather")]
-        public async Task<ActionResult<Weather>> Cold()
-        {
-            return await _weatherLogic.GetTemperatureOfCurrentUsersLocation(this.User);
-        }
-
     }
 }

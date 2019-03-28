@@ -28,8 +28,8 @@ namespace WeatherApi.Authorization
         {
             var weather =  await _weatherLogic.GetTemperatureOfCurrentUsersLocation(context.User);
 
-            var userIsRainLover = context.User.Claims.Any(x => x.Type == "role" && x.Value == "Winter Lover");
-            var userIsSummerLover = context.User.Claims.Any(x => x.Type == "role" && x.Value == "Summer Lover");
+            var userIsRainLover = context.User.IsInRole("Winter Lover");
+            var userIsSummerLover = context.User.IsInRole("Summer Lover");
 
             if (userIsRainLover && weather.Temperature <= requirement.MinCentigradeForGoodWeather)
             {

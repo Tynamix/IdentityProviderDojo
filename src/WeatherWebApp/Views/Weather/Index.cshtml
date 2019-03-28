@@ -1,17 +1,17 @@
 ﻿@model Model.Weather
 
 <div class="text-center">
-    <h1 class="display-4">Wetter</h1>
-   
+    <h1 class="display-4">Hallo @User.FindFirst("name").Value, hier ist dein Wetter!</h1>
+    
     @if (Model != null)
     {
         
         <img width="75px"  src="http://openweathermap.org/img/w/@(Model.WeatherIcon).png"/>
     
-        <h1>@Model.Temperature °C</h1>
+        <h1 class="display-2">@Model.Temperature °C</h1>
     }
     else
     {
-        <h1>Scheinbar darfst du keine Wetterdaten abrufen.</h1>
+        <h1  class="display-4">Scheinbar darfst du keine Wetterdaten abrufen weil du die Rolle @User.FindFirst("role").Value hast.</h1>
     }
 </div>

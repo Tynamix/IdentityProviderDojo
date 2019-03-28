@@ -56,7 +56,7 @@ namespace IdentityServer
                     PostLogoutRedirectUris = { "https://localhost:5002/signout-callback-oidc" },
 
                     AllowOfflineAccess = true,
-                    AllowedScopes = { "openid", "profile", "weatherapi" },
+                    AllowedScopes = { "openid", "profile", "weatherapi", "role"},
 
                     AlwaysSendClientClaims = true
                 },

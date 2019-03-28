@@ -25,7 +25,7 @@ namespace WeatherWebApp.Controllers
         public async Task<IActionResult> Index()
         {
             var httpClient = _httpClientFactory.CreateClient();
-            var requestMessage = new HttpRequestMessage(HttpMethod.Get, "https://localhost:5003/api/weather/coldWeather");
+            var requestMessage = new HttpRequestMessage(HttpMethod.Get, "https://localhost:5003/api/weather");
             requestMessage.Headers.Add("Authorization", $"Bearer {await this.HttpContext.GetTokenAsync("access_token")}");
 
             var weatherResponse = await httpClient.SendAsync(requestMessage);

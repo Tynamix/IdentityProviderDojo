@@ -1,4 +1,5 @@
-﻿using System.IdentityModel.Tokens.Jwt;
+﻿using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
@@ -47,7 +48,10 @@ namespace WeatherWebApp
                     options.ClientId = "demowebapp";
                     options.ClientSecret = "secret";
                     options.ResponseType = "code id_token";
+                    options.Scope.Add("weatherapi");
+                    options.Scope.Add("role");
                     options.SaveTokens = true;
+                    options.GetClaimsFromUserInfoEndpoint = true;
                     options.Events = new OpenIdConnectEvents
                     {
                         OnAuthenticationFailed = context => Task.CompletedTask,

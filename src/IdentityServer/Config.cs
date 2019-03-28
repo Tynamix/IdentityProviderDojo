@@ -4,6 +4,8 @@
 
 using IdentityServer4.Models;
 using System.Collections.Generic;
+using System.Security.Claims;
+using IdentityModel;
 
 namespace IdentityServer
 {
@@ -15,15 +17,24 @@ namespace IdentityServer
             {
                 new IdentityResources.OpenId(),
                 new IdentityResources.Profile(),
+                new IdentityResource
+                {
+                    Name = "role",
+                    Description = "Role Description",
+                    DisplayName = "Role Display Name",
+                    UserClaims = new List<string> { JwtClaimTypes.Role }
+                }
             };
         }
 
         public static IEnumerable<ApiResource> GetApis()
         {
+            var weatherApi = new ApiResource("weatherapi", "Weather API");
+            weatherApi.UserClaims = new List<string> { JwtClaimTypes.Role, "location", "country_code"};
+
             return new ApiResource[]
             {
-                new ApiResource("api1", "My API #1"),
-                new ApiResource("weatherapi", "Weather API")
+                weatherApi
             };
         }
 
@@ -31,18 +42,6 @@ namespace IdentityServer
         {
             return new[]
             {
-                // client credentials flow client
-                new Client
-                {
-                    ClientId = "client",
-                    ClientName = "Client Credentials Client",
-
-                    AllowedGrantTypes = GrantTypes.ClientCredentials,
-                    ClientSecrets = { new Secret("511536EF-F270-4058-80CA-1C89C192F69A".Sha256()) },
-
-                    AllowedScopes = { "api1" }
-                },
-
                 // MVC client using hybrid flow
                 new Client
                 {
@@ -57,7 +56,9 @@ namespace IdentityServer
                     PostLogoutRedirectUris = { "https://localhost:5002/signout-callback-oidc" },
 
                     AllowOfflineAccess = true,
-                    AllowedScopes = { "openid", "profile", "weatherapi" }
+                    AllowedScopes = { "openid", "profile", "weatherapi" },
+
+                    AlwaysSendClientClaims = true
                 },
 
                 new Client
@@ -73,7 +74,9 @@ namespace IdentityServer
                     PostLogoutRedirectUris = { "https://app.getpostman.com/oauth2/logout" },
 
                     AllowOfflineAccess = true,
-                    AllowedScopes = { "openid", "profile", "weatherapi" }
+                    AllowedScopes = { "openid", "profile", "role", "weatherapi" },
+
+                    AlwaysSendClientClaims = true
                 },
 
                 // SPA client using implicit flow

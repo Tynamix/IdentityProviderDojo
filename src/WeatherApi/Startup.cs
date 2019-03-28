@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using WeatherApi.Authorization;
 using WeatherApi.Business;
 using WeatherApi.Business.Contracts;
 using WeatherApi.Configuration;
@@ -26,26 +25,8 @@ namespace WeatherApi
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer(options =>
-                {
-                    options.TokenValidationParameters.ValidAudiences = new[] { "weatherapi" };
-                    options.Authority = "https://localhost:5000";
-                });
-
-            services.AddAuthorization(options =>
-            {
-                options.AddPolicy("GoodWeatherAtLeast20", policy =>
-                    policy.Requirements.Add(new WeatherRequirememt(20)));
-
-            });
-
             services.AddOptions();
             services.Configure<OpenWeatherApiOptions>(c => Configuration.Bind("OpenWeatherApiOptions", c));
-
-            services.AddHttpClient();
-            services.AddSingleton<IWeatherLogic, WeatherLogic>();
-            services.AddSingleton<IAuthorizationHandler, WeatherAuthorizationHandler>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -57,8 +38,6 @@ namespace WeatherApi
             }
 
             app.UseHttpsRedirection();
-
-            app.UseAuthentication();
 
             app.UseMvc();
         }

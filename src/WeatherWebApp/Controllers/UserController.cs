@@ -8,10 +8,5 @@ namespace WeatherWebApp.Controllers
 {
     public class UserController : Controller
     {
-        public async Task Logout()
-        {
-            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            await HttpContext.SignOutAsync(OpenIdConnectDefaults.AuthenticationScheme);
-        }
     }
 }

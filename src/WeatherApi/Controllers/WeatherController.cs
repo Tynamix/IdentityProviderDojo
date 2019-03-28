@@ -17,18 +17,10 @@ namespace WeatherApi.Controllers
     [ApiController]
     public class WeatherController : ControllerBase
     {
-        private readonly IWeatherLogic _weatherLogic;
-
-        public WeatherController(IWeatherLogic weatherLogic)
-        {
-            _weatherLogic = weatherLogic;
-        }
-
-        [Authorize(Policy = "GoodWeatherAtLeast20")]
         [HttpGet]
         public async Task<ActionResult<Weather>> Get()
         {
-            return await _weatherLogic.GetTemperatureOfCurrentUsersLocation(this.User);
+            return new Weather(){Temperature = 12.3, WeatherIcon = "01d" };
         }
     }
 }

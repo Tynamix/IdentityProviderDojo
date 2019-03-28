@@ -9,7 +9,6 @@ using WeatherWebApp.Models;
 
 namespace WeatherWebApp.Controllers
 {
-    [Authorize]
     public class HomeController : Controller
     {
         public IActionResult Index()

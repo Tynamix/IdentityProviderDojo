@@ -34,29 +34,7 @@ namespace WeatherWebApp
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddHttpClient();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-
-            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
-
-            services.AddAuthentication(options =>
-                {
-                    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                    options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
-                })
-                .AddCookie()
-                .AddOpenIdConnect(options =>
-                {
-                    options.Authority = "https://localhost:5000";
-                    options.ClientId = "demowebapp";
-                    options.ClientSecret = "secret";
-                    options.ResponseType = "code id_token";
-                    options.Scope.Add("weatherapi");
-                    options.Scope.Add("role");
-                    options.SaveTokens = true;
-                    options.GetClaimsFromUserInfoEndpoint = true;
-                    options.ClaimActions.MapJsonKey(ClaimTypes.Role, "role", ClaimValueTypes.String);
-                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -75,7 +53,6 @@ namespace WeatherWebApp
 
             app.UseStaticFiles();
             app.UseCookiePolicy();
-            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {

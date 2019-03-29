@@ -149,6 +149,45 @@ namespace IdentityServer
                     {
                         Console.WriteLine("bob already exists");
                     }
+
+                    var clara = userMgr.FindByNameAsync("clara").Result;
+                    if (clara == null)
+                    {
+                        clara = new ApplicationUser
+                        {
+                            UserName = "clara"
+                        };
+                        var result = userMgr.CreateAsync(clara, "Pass123$").Result;
+                        if (!result.Succeeded)
+                        {
+                            throw new Exception(result.Errors.First().Description);
+                        }
+
+                        result = userMgr.AddClaimsAsync(clara, new Claim[]{
+                            new Claim(JwtClaimTypes.Name, "Clara Smith"),
+                            new Claim(JwtClaimTypes.GivenName, "Clara"),
+                            new Claim(JwtClaimTypes.FamilyName, "Smith"),
+                            new Claim(JwtClaimTypes.Email, "ClaraSmith@email.com"),
+                            new Claim(JwtClaimTypes.EmailVerified, "true", ClaimValueTypes.Boolean),
+                            new Claim(JwtClaimTypes.WebSite, "http://clara.com"),
+                            new Claim("location", "Sydney"),
+                            new Claim("country_code", "AU")
+                        }).Result;
+                        if (!result.Succeeded)
+                        {
+                            throw new Exception(result.Errors.First().Description);
+                        }
+                        result = userMgr.AddToRolesAsync(clara, new[] { "Winter Lover", "Summer Lover" }).Result;
+                        if (!result.Succeeded)
+                        {
+                            throw new Exception(result.Errors.First().Description);
+                        }
+                        Console.WriteLine("clara created");
+                    }
+                    else
+                    {
+                        Console.WriteLine("clara already exists");
+                    }
                 }
             }
         }
